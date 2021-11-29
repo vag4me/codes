@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+struct point
+{
+	float x;
+	float y;
+	float z;
+};
+
+int main()
+{
+
+	struct point p1;
+	struct point p2;
+
+
+	float xt,yt,zt;
+	float distance;
+
+
+	printf("give the coordinates of 2 points in3_dimensional world\n");
+	printf("give the first point like that x1|y1|z1\n");
+	scanf("%d|%d|%d", &p1.x, &p1.y, &p1.z);
+	printf("give the second point like that x2|y2|z2\n");
+	scanf("%f|%f|%f", &p2.x, &p2.y, &p2.z);
+
+
+	xt = (p2.x - p1.x)*1.0;
+	yt = (p2.y - p1.y)*1.0;
+	zt = (p2.z - p1.z)*1.0;
+
+	distance = sqrt(pow(xt, 2) + pow(yt, 2) + pow(zt, 2)*1.0);
+
+	printf("%f", distance);
+
+}
