@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char *argv[]) {
+	
+	FILE *in,*out;
+	in=fopen("smth.txt","r");
+	out=fopen("smth2.txt","w");
+	
+	char filename1[100],filename2[100];
+	char c;
+	
+	c=fgetc(in);
+	while(c!=EOF)
+	{
+		fputc(c,out);
+		c=fgetc(in);
+	}
+	
+	fclose(out);
+	
+	out=fopen("smth2.txt","r");
+	c=fgetc(out);
+	while(c!=EOF)
+	{
+		printf("%c",c);
+		c=fgetc(out);
+	}
+	
+	fclose(in);
+	fclose(out);
+	
+	
+	return 0;
+}
