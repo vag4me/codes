@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node
+{
+	int value;
+	struct node *next; 
+	struct node *pre;
+};
+
+int main(int argc, char *argv[]) {
+	
+	struct node *head = NULL;
+	struct node *second = NULL;
+	struct node *third = NULL; 
+	
+	head = (struct node*)malloc(sizeof(struct node));
+    second = (struct node*)malloc(sizeof(struct node));
+	third = (struct node*)malloc(sizeof(struct node));
+	
+	head -> value = 1;
+	head -> next = second;
+	head -> pre = NULL;
+	
+	second -> value = 2;
+	second -> next = third;
+	second -> pre = head;
+	
+	third -> value = 3;
+	third -> next = NULL;
+	third -> pre = second;
+	
+	while(head != NULL)
+	{
+		printf("%d\n",head -> value);
+		head = head -> next;
+	}
+	
+	while(third != NULL)
+	{
+		printf("%d\n",third -> value);
+		third = third -> pre;	
+	}
+	
+	
+	return 0;
+}
