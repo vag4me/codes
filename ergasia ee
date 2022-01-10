@@ -1,0 +1,227 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int j=0;
+
+
+int total_bases(int *ptr)
+{
+	int count=0;
+	char c;
+	
+	c=fgetc(ptr);
+	while(c!=EOF)
+	{
+		count = count+1;
+		c = fgetc(ptr);
+	}
+	
+	return count;
+}
+
+
+float number_of_base(char base,int *ptr)
+{
+	int count=0;
+	char c;
+	
+	c=fgetc(ptr);
+	while(c!=EOF)
+	{
+		if(c==base)
+		{
+		count = count+1;
+	    }
+	    
+		c = fgetc(ptr);
+	}	
+	
+	return count;
+}
+
+
+int get_pointer_in_position(int limit,int *pointer)
+{
+	int count = 1;
+	char c;
+	
+	c=fgetc(pointer);
+	while(count<=limit)
+	{
+		count++;
+		c=getc(pointer);
+	}
+	return 0;
+}
+
+
+  int tga_finder(int *ptr,int *ptr3)
+  {
+  	char temp[10000];
+  	int i,count=0;
+  	
+  	for(i=0;i<=10000;i++)
+  	{
+  		temp[i] = fgetc(ptr);
+	}
+	
+	for(i=0;i<=10000;i++)
+	{
+		if(temp[i]=='t')
+		{
+			if(temp[i+1]=='g')
+			{
+				if(temp[i+2]=='a')
+				{
+					count=count+1;
+					fprintf(ptr3,"%d\n",i+800000);					
+				}
+			}		
+		}
+	}
+    return count;
+  }
+  
+  int tga_finder2(int *ptr, int *ptr3)
+  {
+  		char temp[10000];
+  	int i,count=0;
+  	
+  	for(i=0;i<=10000;i++)
+  	{
+  		temp[i] = fgetc(ptr);
+	}
+	
+	for(i=0;i<=10000;i++)
+	{
+		if(temp[i]=='t')
+		{
+			if(temp[i+1]=='g')
+			{
+				if(temp[i+2]=='a')
+				{
+					count=count+1;
+					fprintf(ptr3,"%d\n",i+2510000);					
+				}
+			}		
+		}
+	}
+    return count;
+  }
+  
+  int ttggat_finder(int *ptr)
+  {
+  	char temp[10000];
+  	int i,count=0,count2=0;
+  	
+  	for(i=0;i<=10000;i++)
+  	{
+  		temp[i] = fgetc(ptr);
+	}
+	
+	for(i=0;i<=10000;i++)
+	{
+		if(temp[i]=='t')
+		{
+			if(temp[i+1]=='t')
+			{
+				if(temp[i+2]=='g')
+				{
+					if(temp[i+3]=='g')
+					{
+						if(temp[i+4]=='a')
+						{
+						  count=i+800000;
+						  count2=count-count2;
+						  
+					}
+				}
+			}
+		}
+	}
+  }
+  return count2;
+}
+
+
+
+int main(int argc, char *argv[]) {
+	
+	FILE *fp,*fp2;
+	int total,i,count,count2,count3,count4;
+	float number_base_a,number_base_c,number_base_g,number_base_t;
+	 const char* tex={"tga -> 800000 - 810000"};
+	 const char* tex2={"tga -> 2500000-2520000"};
+	 const char* tex3={"ttggat -> 800000-810000"};
+	
+	
+	fp = fopen("ecoli1.dat","r");  // open the file
+	if(fp==NULL)
+	{
+		printf("ERROR this file failed to open\n");
+	}
+	else
+	{
+		printf("its open\n");
+	}
+	
+	
+	total=total_bases(fp);
+	printf("the total number of bases is %d\n",total);
+	rewind(fp);  //sets the pointer back to start
+	
+		
+	number_base_a = number_of_base('a',fp); //count the base a
+	rewind(fp);
+	number_base_c = number_of_base('c',fp);
+	rewind(fp);
+	number_base_g = number_of_base('g',fp);
+	rewind(fp);
+	number_base_t = number_of_base('t',fp);
+	rewind(fp);
+	
+	printf("the number of the base a that exist in the file is = %f\n",number_base_a/total);
+	printf("the number of the base c that exist in the file is = %f\n",number_base_c/total);
+	printf("the number of the base g that exist in the file is = %f\n",number_base_g/total);
+	printf("the number of the base t that exist in the file is = %f\n",number_base_t/total);
+	
+	
+	fp2=fopen("results.txt","w");   //open and edit results.txt
+	if(fp2 == NULL)
+	{
+		printf("error the file results couldnt open\n");	
+	}
+	
+	fprintf(fp2,"%s\n",tex);
+	
+
+
+	get_pointer_in_position(800000,fp); //set pointer for part 2a of exercise
+	count = tga_finder(fp,fp2);
+	printf("the tga is appearing %d times from 800000 to 810000\n",count);
+	
+	
+	fprintf(fp2,"%s\n",tex2);
+
+	
+	get_pointer_in_position(2510000,fp); //set pointer for part 2b of exercise
+	count2 = tga_finder2(fp,fp2);
+	printf("the tga is appearing %d times from 2510000 to 2520000\n",count2);
+	
+	
+	fprintf(fp2,"%s\n",tex3);
+	
+	
+	get_pointer_in_position(800000,fp); //set pointer for part 3 of exercise
+
+    count3=ttggat_finder(fp);
+    printf("the ttggat has %d bases bettween",count3);
+    fprintf(fp2,"%d\n",count3);
+
+    
+	
+	
+	fclose(fp);
+	fclose(fp2);
+	return 0;
+}
