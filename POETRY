@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int main()
+{
+	FILE *fp;
+	int count = 0;
+	char c;
+
+	fp = fopen("data.txt", "r");
+
+	if (fp == NULL)
+	{ 
+		printf("error\n");
+		exit(1);
+	}
+	else
+	{
+		printf("its open\n");
+	}
+
+	c = fgetc(fp);
+	while (c != EOF)
+	{
+		printf("%c", c);
+		c = fgetc(fp);
+	}
+
+
+
+	
+}
