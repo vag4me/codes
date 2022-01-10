@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+int main()
+{
+	FILE* fp;
+	int i,num,sum = 0,data[20];
+	char c;
+
+	fp = fopen("bin.dat", "wb+");
+
+	if (fp != NULL)
+	{
+		printf("its open\n");
+	}
+
+	for (i = 1; i <= 20; i++)
+	{
+		fprintf(fp, "%d\n", i);
+	}
+
+	rewind(fp);
+
+	for (i = 0; i <= 19; i++)
+	{
+		fscanf(fp, "%d\n", &num);
+		printf("%d\n", num);
+		data[i] = num;
+	}
+
+	for (i = 0; i <= 19; i++)
+	{
+		sum = data[i] + sum;
+	}
+
+	printf("sum is = %d", sum);
+
+}
