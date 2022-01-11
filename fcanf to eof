@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int main()
+{
+	FILE* fp;
+	char name[10];
+	int age;
+
+	fp = fopen("dataa.txt", "r");
+	if (fp != NULL)
+	{
+		printf("its open\n");
+	}
+
+	while (fscanf(fp, "%s", name) != EOF)
+	{
+		puts(name);
+	}
+	
+}
