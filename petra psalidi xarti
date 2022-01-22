@@ -1,0 +1,87 @@
+ #include <stdio.h>
+ #include <time.h>
+
+
+int random()
+{
+	int number;
+
+	srand(time(NULL));
+	number = rand() % (3 + 1 - 1) + 1;
+	return number;
+}
+
+int find_winner(int choice, int pc)
+{
+
+	if (choice == pc)
+	{
+		return 0;
+	}
+		if (choice == 1)
+		{
+			if (pc == 2)
+			{
+				return 1;
+			}
+			else if (pc == 3);
+			{
+				return 2;
+			}
+		}
+		else if (choice == 2)
+		{
+			if (pc == 1)
+			{
+				return 2;
+			}
+			else if (pc = 3)
+			{
+				return 1;
+			}
+		}
+		else if (choice == 3)
+		{
+			if (pc == 1)
+			{
+				return 1;
+			}
+			else if (pc == 2)
+			{
+				return 2;
+			}
+		}
+}
+
+void converd(int win)
+{
+	if (win == 1)
+	{
+		printf("you are the winner!!!!\n");
+	}
+	else if(win == 2)
+	{
+		printf("pc is the winner!!!!\n");
+	}
+	else
+	{
+		printf("its a draw\n");
+	}
+}
+
+int main()
+{
+	int choice, pc, winner;
+
+	printf("this is petra psalidi xarti\n");
+	printf("please select your weapon\npress 1 for petra\n press 2 for psalidi\n press 3 for xarti\n");
+	scanf("%d", &choice);
+
+	pc = random();
+	winner = find_winner(choice, pc);
+	printf("the pc choose %d\n", pc);
+	converd(winner);
+	
+
+
+}
