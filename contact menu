@@ -1,0 +1,65 @@
+#include <stdio.h>
+
+int main()
+{
+	FILE *fp;
+
+	int code,count = 3,choice;
+	char c,name[10],tel[15];
+	
+
+	printf("give the password to enter\n");
+	do
+	{
+		scanf("%d", &code);
+		count--;
+		if (code != 23210)
+		{
+			printf("you have %d tries more\n", count);
+		}
+		
+		if (count == 0)
+		{
+			printf("entry denied\n");
+			exit(0);
+		}
+
+	} while (code != 23210);
+
+	printf("welcome\n");
+
+	fp = fopen("phone.txt", "a+");
+	if (fp == NULL)
+	{
+		printf("error file not found\n");
+		exit(0);
+	}
+
+	printf("press 1 to see the phones\n");
+	printf("press 2 to add a contact\n");
+	scanf("%d", &choice);
+
+	if (choice == 1)
+	{
+		c = fgetc(fp);
+		while (c != EOF)
+		{
+			printf("%c", c);
+			c = fgetc(fp);
+		}
+	}
+	else if(choice == 2)
+	{
+		printf("give the name\n");
+		scanf("%s", name);
+		printf("give the tel\n");
+		scanf("%s", tel);
+
+		fprintf(fp, "\n%s", name);
+		fprintf(fp, " %s", tel);
+	}
+		
+
+
+	
+}
