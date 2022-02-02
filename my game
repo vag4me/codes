@@ -1,0 +1,87 @@
+#include <stdio.h>
+
+void showtable(char ar[20])
+{
+	int i;
+
+	for (i = 0; i < 20; i++)
+	{
+		printf("%c", ar[i]);
+	}
+	printf("\n");
+}
+
+void change(char ar[20], char c, int *pt,int *pt2)
+{
+	if (c == 'd')
+	{
+		*pt = *pt + 1;
+		ar[*pt] = 'x';
+		ar[*pt - 1] = '.';
+	}
+	else if (c == 'a')
+	{
+		*pt = *pt - 1;
+		ar[*pt] = 'x';
+		ar[*pt + 1] = '.';
+	}
+	else if (c == 'w')
+	{
+		*pt = *pt + 2;
+		ar[*pt] = 'x';
+		ar[*pt - 2] = '.';
+	}
+
+	if (*pt == 9 || *pt == 15 || *pt == 3 ||*pt == 5)
+	{
+		*pt2 = 1;
+	}
+
+	if (*pt == 19)
+	{
+		printf("you won\n");
+		exit(0);
+	}
+
+	if (*pt < 0)
+	{
+		printf("you died\n");
+		exit(0);
+	}
+
+}
+
+int main()
+{
+	int player = 0,i,flag = 0;
+	char ar[20],choice;
+	int *ptr,*ptr2;
+
+	ptr = &player;
+	ptr2 = &flag;
+	ar[0] = 'x';
+
+	for (i = 1; i < 20; i++)
+	{
+		ar[i] = '.';
+	}
+
+	ar[9] = '!';
+	ar[15] = '!';
+	ar[3] = '!';
+	ar[5] = '!';
+
+	printf("press d for 1 block to the right\npress a for 1 block to the left\npress w to 2 blocks to the right\n");
+	printf("press d to play\n");
+
+	while (flag == 0)
+	{
+		scanf("%c", &choice);
+		system("cls");
+		change(ar, choice,ptr,ptr2);
+		showtable(ar);
+	}
+
+	printf("you lost\n");
+
+}
